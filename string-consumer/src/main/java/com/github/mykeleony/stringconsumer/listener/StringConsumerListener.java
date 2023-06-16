@@ -1,5 +1,6 @@
 package com.github.mykeleony.stringconsumer.listener;
 
+import com.github.mykeleony.stringconsumer.listener.custom.StringConsumerCustomListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -11,9 +12,7 @@ public class StringConsumerListener {
 
     private final Logger LOG = LoggerFactory.getLogger(StringConsumerListener.class);
     
-    @KafkaListener(groupId = "group-1", topicPartitions = {
-            @TopicPartition(topic = "string-topic", partitions = {"0"})
-    }, containerFactory = "stringContainerFactory")
+    @StringConsumerCustomListener(groupId = "group-1")
     public void create(String message) {
         LOG.info("Received message '{}'", message);
     }
